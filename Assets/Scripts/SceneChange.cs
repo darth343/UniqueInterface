@@ -6,14 +6,19 @@ using UnityEngine.EventSystems;
 
 public class SceneChange : MonoBehaviour
 {
-
     // Button to know which scene to change to
     //public Text ButtonText;
+
+    // Debug
+    public Text DebugInfo;
+
+    private SharedData sharedData;
 
     // Use this for initialization
     void Start()
     {
-
+        var sharedGO = GameObject.Find("SharedData");
+        sharedData = sharedGO.GetComponent<SharedData>();
     }
 
     // Update is called once per frame
@@ -24,12 +29,23 @@ public class SceneChange : MonoBehaviour
         //{
         //    //SceneManager.LoadScene("Scene2");
         //}
+        DebugInfo.text = sharedData.CurrScene + " " + sharedData.PrevScene;
     }
 
     public void Change(string name)
     {
-        var go = EventSystem.current.currentSelectedGameObject;
-
+        sharedData.PrevScene = sharedData.CurrScene;
+        sharedData.CurrScene = name;
+        
         SceneManager.LoadScene(name);
+    }
+
+    public void Back(string name)
+    {
+        string temp = sharedData.PrevScene;
+        sharedData.PrevScene = sharedData.CurrScene;
+        sharedData.CurrScene = temp;
+
+        SceneManager.LoadScene(sharedData.CurrScene);
     }
 }
