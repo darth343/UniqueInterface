@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SharedData : MonoBehaviour {
+public class SharedData : MonoBehaviour
+{
 
-    public string CurrScene = "Main";
-    public string PrevScene = "";
+    public string CurrScene;
+    public string PrevScene;
 
-	// Use this for initialization
-	void Start () {
-        DontDestroyOnLoad(this);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

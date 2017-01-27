@@ -39,13 +39,7 @@ public class JoyCTRL : MonoBehaviour {
 
     public void OnClick()
     {
-        #if UNITY_ANDROID
-            Touch myTouch = Input.GetTouch(0);
-            Vector3 newPos = new Vector3(myTouch.position.x, myTouch.position.y, 1);
-        #else
-            Vector3 newPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1);
-        #endif
-     
+        Vector3 newPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1);
         ImgBG.transform.position = newPos;
         ImgFG.transform.position = newPos;
         ImgBG.transform.localScale = new Vector3(1, 1, 1);
@@ -53,15 +47,7 @@ public class JoyCTRL : MonoBehaviour {
 
     public void Dragging()
     {
-        Vector3 MousePosition;
-
-        #if UNITY_ANDROID
-            Touch myTouch = Input.GetTouch(0);
-            MousePosition = new Vector3(myTouch.position.x, myTouch.position.y, 1);
-        #else
-            MousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1);
-        #endif
-
+        Vector3 MousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1);
         Vector3 newPos = MousePosition - ImgBG.transform.position;
         if(newPos.magnitude < 60)
         ImgFG.rectTransform.position = MousePosition;

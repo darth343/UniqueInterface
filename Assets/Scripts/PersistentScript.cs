@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Init : MonoBehaviour {
+public class PersistentScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        var mySingleton = new Singleton();
+        DontDestroyOnLoad(transform.gameObject);
 	}
 	
 	// Update is called once per frame

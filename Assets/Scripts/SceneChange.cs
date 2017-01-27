@@ -29,14 +29,19 @@ public class SceneChange : MonoBehaviour
         //{
         //    //SceneManager.LoadScene("Scene2");
         //}
-        DebugInfo.text = sharedData.CurrScene + " " + sharedData.PrevScene;
+
+        //DebugInfo.text = "Prev: " + sharedData.PrevScene + '\n' + "Curr: " + sharedData.CurrScene;
+        DebugInfo.text = "Prev: " + Singleton.PrevScene + '\n' + "Curr: " + Singleton.CurrScene;
     }
 
     public void Change(string name)
     {
         sharedData.PrevScene = sharedData.CurrScene;
         sharedData.CurrScene = name;
-        
+
+        //Singleton.PrevScene = Singleton.CurrScene;
+        //Singleton.CurrScene = name;
+
         SceneManager.LoadScene(name);
     }
 
@@ -46,6 +51,10 @@ public class SceneChange : MonoBehaviour
         sharedData.PrevScene = sharedData.CurrScene;
         sharedData.CurrScene = temp;
 
-        SceneManager.LoadScene(sharedData.CurrScene);
+        //string temp = Singleton.PrevScene;
+        //Singleton.PrevScene = Singleton.CurrScene;
+        //Singleton.CurrScene = temp;
+
+        SceneManager.LoadScene(temp);
     }
 }
