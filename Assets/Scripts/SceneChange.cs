@@ -31,7 +31,7 @@ public class SceneChange : MonoBehaviour
         //}
 
         //DebugInfo.text = "Prev: " + sharedData.PrevScene + '\n' + "Curr: " + sharedData.CurrScene;
-        DebugInfo.text = "Prev: " + Singleton.PrevScene + '\n' + "Curr: " + Singleton.CurrScene;
+        DebugInfo.text = "Prev: " + sharedData.PrevScene + '\n' + "Curr: " + sharedData.CurrScene;
     }
 
     public void Change(string name)
