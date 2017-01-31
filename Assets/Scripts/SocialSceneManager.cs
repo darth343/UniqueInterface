@@ -13,18 +13,25 @@ public class SocialSceneManager : MonoBehaviour {
     public GameObject MailScene;
     public GameObject SocialNetworkScene;
 
+    public Text EnergyText;
+    public Text PremiumCurrencyText;
+    public Text NormalCurrencyText;
+
 	// Use this for initialization
 	void Start () {
         highlighttab = "NIL";
         highlight.color = new Color(1f, 1f, 1f, 0.2f);
-        SwitchScene("Friends");
+        SwitchScene("Guild");
         DebugInfo.text = "NOTHING";
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+	    SharedData sharedData = GameObject.Find("SharedData").GetComponent<SharedData>();
+        PremiumCurrencyText.text = sharedData.PremiumCurrency.ToString();
+        NormalCurrencyText.text = sharedData.NormalCurrency.ToString();
+        EnergyText.text = sharedData.Energy.ToString() + "/" + sharedData.EnergyLimit.ToString();
+    }
 
 
     public void SwitchScene(string name)

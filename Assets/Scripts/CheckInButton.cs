@@ -5,7 +5,7 @@ using System.Collections;
 public class CheckInButton : MonoBehaviour {
 
     public SharedData sharedData;
-
+    public int Index;
 	// Use this for initialization
 	void Start () {
 	}
@@ -18,6 +18,7 @@ public class CheckInButton : MonoBehaviour {
     public void OnClick()
     {
         GetComponent<Button>().interactable = false;
-        sharedData.IncreaseNormalCurrency(20);
+        GameObject.Find("SharedData").GetComponent<SharedData>().IncreaseNormalCurrency(20);
+        GameObject.Find("SharedData").GetComponent<SharedData>().CheckInButtonList[Index].GetComponent<Button>().interactable = false;
     }
 }

@@ -5,35 +5,53 @@ using System.Collections;
 
 public class SharedData : MonoBehaviour
 {
-    public static SharedData instance;
+    public static SharedData instance = null;
     public string CurrScene;
     public string PrevScene;
 
-    private int EnergyLimit;
+    public int EnergyLimit;
     public int Energy;
-    public Text EnergyText;
 
     public int PremiumCurrency;
-    public Text PremiumCurrencyText;
-
     public int NormalCurrency;
-    public Text NormalCurrencyText;
+
+    public List<GameObject> CheckInButtonList;
 
     protected SharedData(){}
 
+    void CreateCheckIn()
+    {
+        int NumberOfDays = System.DateTime.DaysInMonth(System.DateTime.Now.Year, System.DateTime.Now.Month);
+        int CurrentDay = System.DateTime.Now.Day;
+        for (int i = 1; i <= NumberOfDays; i++)
+        {
+            GameObject temp = Instantiate(GameObject.Find("CheckInButton"));
+            temp.name = "Check In " + i;
+            temp.GetComponent<CheckInButton>().Index = i - 1;
+            temp.GetComponentInChildren<Text>().text = "Day " + i;
+            if (i > CurrentDay)
+                temp.GetComponent<Button>().interactable = false;
+            DontDestroyOnLoad(temp.transform.gameObject);
+            CheckInButtonList.Add(temp);
+        }
+    }
+
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        
+
         EnergyLimit = 9999;
-        Energy = 1000;
-        EnergyText.text = Energy.ToString() + "/" + EnergyLimit.ToString();
-
-        PremiumCurrency = 1000;
-        PremiumCurrencyText.text = PremiumCurrency.ToString();
-
-        NormalCurrency = 1000;
-        NormalCurrencyText.text = NormalCurrency.ToString();
-
+        CreateCheckIn();
         DontDestroyOnLoad(transform.gameObject);
     }
 
@@ -45,9 +63,11 @@ public class SharedData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnergyText.text = Energy.ToString() + "/" + EnergyLimit.ToString();
-        PremiumCurrencyText.text = PremiumCurrency.ToString();
-        NormalCurrencyText.text = NormalCurrency.ToString();
+    }
+
+    public SharedData GetInstance()
+    {
+        return instance;
     }
 
     public void IncreaseNormalCurrency(int amount)
