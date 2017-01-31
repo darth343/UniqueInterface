@@ -17,6 +17,16 @@ public class SharedData : MonoBehaviour
 
     public List<GameObject> CheckInButtonList;
 
+    public string GraphicalLevel;
+    public bool IsPowerSaver;
+
+    public int SoundLevel;
+    public int MusicLevel;
+
+    public bool IsNotification;
+    public bool IsInvert;
+    public bool IsVibrate;
+
     protected SharedData(){}
 
     void CreateCheckIn()
